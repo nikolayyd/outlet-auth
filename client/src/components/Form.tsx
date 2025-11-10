@@ -1,5 +1,8 @@
-import { useState } from 'react';
+import { z } from 'zod';
 import '../styles/Form.css';
+import { useForm } from 'react-hook-form';
+import { SignUpSchema } from '../schemas/auth';
+import { zodResolver } from '@hookform/resolvers/zod';
 export interface FormData {
   firstName?: string;
   lastName?: string;
@@ -7,58 +10,59 @@ export interface FormData {
   password: string;
 }
 
-export const Form = () => {
-  const [email, setEmail] = useState<string>();
-  const [firstName, setFirstName] = useState<string>();
-  const [lastName, setLastName] = useState<string>();
-  const [password, setPassword] = useState<string>();
-  const [confirmPassword, setConfirmPassword] = useState<string>();
+type SignUpData = z.infer<typeof SignUpSchema>;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('[Log] Form submitted!');
+export const Form = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignUpData>({
+    resolver: zodResolver(SignUpSchema),
+  });
+
+  const onSubmit = (data: SignUpData) => {
+      console.log('[Log] Form submitted!');
+      console.log(data);
   };
 
   return (
     <div>
       <div className="container-form">
-        <form className="form-auth" onSubmit={handleSubmit}>
-          <h1 className='auth-title'>Form component</h1>
+        <form className="form-auth" onSubmit={handleSubmit(onSubmit)}>
+          <h1 className="auth-title">Form component</h1>
           <input
-            name="first-name"
-            value={firstName}
             className="input-form"
             placeholder="Enter first name.."
-            onChange={(e) => setFirstName(e.target.value)}
+            {...register('firstName')}
           />
+          {errors.firstName && <p>{errors.firstName.message}</p>}
           <input
-            name="last-name"
-            value={lastName}
             className="input-form"
             placeholder="Enter last name.."
-            onChange={(e) => setLastName(e.target.value)}
+            {...register('lastName')}
           />
+          {errors.lastName && <p>{errors.lastName.message}</p>}
           <input
-            name="email"
-            value={email}
             className="input-form"
             placeholder="Enter email.."
-            onChange={(e) => setEmail(e.target.value)}
+            {...register('email')}
           />
+          {errors.email && <p>{errors.email.message}</p>}
           <input
             type="password"
-            value={password}
             className="input-form"
             placeholder="Enter password.."
-            onChange={(e) => setPassword(e.target.value)}
+            {...register('password')}
           />
+          {errors.password && <p>{errors.password.message}</p>}
           <input
             type="password"
-            value={confirmPassword}
             className="input-form"
             placeholder="Confirm password.."
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            {...register('confirmPassword')}
           />
+          {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
           <button className="submit-btn">Submit</button>
         </form>
       </div>
