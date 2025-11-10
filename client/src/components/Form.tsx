@@ -16,7 +16,7 @@ export const Form = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('>>>submitted!');
+    console.log('[Log] Form submitted!');
   };
 
   return (
