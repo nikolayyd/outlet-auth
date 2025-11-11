@@ -1,7 +1,5 @@
-import { Form } from "../components/Form"
+import { Form } from '../components/Form';
 
 export const SignIn = () => {
-    return(
-        <Form signingUp={false}/>
-    )
-}
+  return <Form signingUp={false} />;
+};

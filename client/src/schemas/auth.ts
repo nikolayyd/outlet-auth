@@ -19,6 +19,6 @@ export const SignUpSchema = z
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: 'Passwords doesn\'t match',
+    message: "Passwords doesn't match",
     path: ['confirmPassword'],
   });

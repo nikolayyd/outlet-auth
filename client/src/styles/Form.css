@@ -34,16 +34,15 @@ input:-moz-autofill {
   -moz-text-fill-color: #333;
 }
 
-
 .form-page {
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background-color: #f5f3f0;
-    color: #8b6655;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #f5f3f0;
+  color: #8b6655;
 }
 
 .form-auth {
@@ -52,7 +51,7 @@ input:-moz-autofill {
   justify-content: center;
   width: 60%;
   max-width: 768px;
-  background-color: rgb(255,255,255,0.85);
+  background-color: rgb(255, 255, 255, 0.85);
   border-radius: 6px;
 }
 
@@ -65,46 +64,46 @@ input:-moz-autofill {
 }
 
 .input-form {
-    padding: 1em 0.75em;
-    color: #8b6655;
-    /* font-size: 15px; */
-    border-radius: 6px;
-    border: 2px solid rgba(240,206,170,0.3);
-    transition: border 0.3s, background-color 0.4s;
+  padding: 1em 0.75em;
+  color: #8b6655;
+  /* font-size: 15px; */
+  border-radius: 6px;
+  border: 2px solid rgba(240, 206, 170, 0.3);
+  transition: border 0.3s, background-color 0.4s;
 }
 
 .input-form::placeholder {
-    color: #8b6655;
-    font-style: italic;
+  color: #8b6655;
+  font-style: italic;
 }
 
 .input-form:focus {
-    outline: 2px solid rgba(240,206,170,0.3);
-    background-color: #faf9f6;
+  outline: 2px solid rgba(240, 206, 170, 0.3);
+  background-color: #faf9f6;
 }
 
 .input-form:hover {
-    outline: 2px solid rgba(240,206,170,0.3);
-    background-color: #faf9f6;
+  outline: 2px solid rgba(240, 206, 170, 0.3);
+  background-color: #faf9f6;
 }
 
 .submit-btn {
-    cursor: pointer;
-    align-self: center;
-    padding: 0.5em 4em;
-    border: 2px solid rgba(240,206,170,0.3);
-    border-radius: 8px;
-    background-color: #f0ceaa;
-    margin-bottom: 2.5em;
-    transition: background-color 0.3s;
+  cursor: pointer;
+  align-self: center;
+  padding: 0.5em 4em;
+  border: 2px solid rgba(240, 206, 170, 0.3);
+  border-radius: 8px;
+  background-color: #f0ceaa;
+  margin-bottom: 2.5em;
+  transition: background-color 0.3s;
 }
 
 .submit-btn:hover {
-    background-color: #e0be9c;
+  background-color: #e0be9c;
 }
 
 .auth-title {
-    align-self: center;
-    margin-top: 1em;
-    margin-bottom: 2em;
+  align-self: center;
+  margin-top: 1em;
+  margin-bottom: 2em;
 }

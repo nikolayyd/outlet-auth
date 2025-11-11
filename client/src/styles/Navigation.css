@@ -1,28 +1,28 @@
 .container-nav {
-
+  background-color: #f5f3f0;
 }
 
 .navigation {
-    display: flex;
-    padding: 1em 0.5em;
-    justify-content: space-between;
-    gap: 0.3em
+  display: flex;
+  padding: 1em 0.5em;
+  justify-content: space-between;
+  gap: 0.3em;
 }
 
 .nav-item {
-    cursor: pointer;
-    padding: 0.5em 0.75em;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    color: #000;
-    text-decoration: none;
-    background-color: #eeeeee;
-    transition: background-color 0.3s;
+  cursor: pointer;
+  padding: 0.5em 0.75em;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  color: #000;
+  text-decoration: none;
+  background-color: #d9d5d1;
+  transition: background-color 0.3s;
 }
 
 .nav-item.active {
-    background-color: #ddd;
+  /* background-color: #ccc; */
 }
 .nav-item:hover {
-    background-color: #ddd;
+  /* background-color: #ccc; */
 }
