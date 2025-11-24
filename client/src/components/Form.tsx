@@ -1,9 +1,13 @@
 import { z } from 'zod';
 import '../styles/Form.css';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { SignUpSchema } from '../schemas/auth';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { userService } from '../services/UserService';
+
 export interface FormData {
   firstName?: string;
   lastName?: string;
@@ -11,7 +15,6 @@ export interface FormData {
   password: string;
 }
 
-// type SignUpData = z.infer<typeof SignUpSchema>;
 type FormDataType = z.infer<ReturnType<typeof SignUpSchema>>;
 
 interface FormProps {
@@ -19,6 +22,8 @@ interface FormProps {
 }
 
 export const Form = ({ signingUp }: FormProps) => {
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
   const schema = SignUpSchema(signingUp);
   const {
     register,
@@ -30,7 +35,6 @@ export const Form = ({ signingUp }: FormProps) => {
 
   const onSubmit = async (data: FormDataType) => {
     console.log('[Log] Form submitted!');
-    console.log(data);
     if (signingUp) {
       await userService.createUser(
         data.email,
@@ -41,6 +45,11 @@ export const Form = ({ signingUp }: FormProps) => {
     } else {
       await userService.getUser(data.email, data.password);
     }
+
+    if (auth) {
+      auth.setIsAuth(true);
+      navigate('/dashboard');
+    }
   };
 
   return (
@@ -48,7 +57,7 @@ export const Form = ({ signingUp }: FormProps) => {
       <div className="form-page">
         <form className="form-auth" onSubmit={handleSubmit(onSubmit)}>
           <div className="container-form">
-            <h1 className="auth-title">Form component</h1>
+            <h1 className="auth-title">{signingUp ? "Sign Up" : "Sign In"}</h1>
             {signingUp && (
               <input
                 className="input-form"
@@ -92,6 +101,12 @@ export const Form = ({ signingUp }: FormProps) => {
             <button className="submit-btn">
               {signingUp ? 'Sign Up' : 'Sign In'}
             </button>
+
+            {!signingUp && (
+              <div className='sign-alert'>
+                If you don't have an account, please sign in <div className='sign-in-link' onClick={() => navigate('/sign-up')}>here</div>
+              </div>
+            )}
           </div>
         </form>
       </div>

@@ -24,14 +24,14 @@
 
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px #faf9f6 inset;
-  /* -webkit-text-fill-color: #333;  */
+  -webkit-text-fill-color: #8b6655;
   transition: background-color 5000s ease-in-out 0s;
 }
 
 /* Firefox */
 input:-moz-autofill {
   box-shadow: 0 0 0px 1000px #faf9f6 inset;
-  -moz-text-fill-color: #333;
+  -moz-text-fill-color: #8b6655;
 }
 
 .form-page {
@@ -90,11 +90,11 @@ input:-moz-autofill {
 .submit-btn {
   cursor: pointer;
   align-self: center;
-  padding: 0.5em 4em;
+  padding: 0.5em 1em;
   border: 2px solid rgba(240, 206, 170, 0.3);
   border-radius: 8px;
   background-color: #f0ceaa;
-  margin-bottom: 2.5em;
+  margin-bottom: 0.75em;
   transition: background-color 0.3s;
 }
 
@@ -105,5 +105,17 @@ input:-moz-autofill {
 .auth-title {
   align-self: center;
   margin-top: 1em;
+  margin-bottom: 2em;
+}
+
+.sign-in-link {
+  display: inline;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.sign-alert {
+  text-align: center;
   margin-bottom: 2em;
 }
