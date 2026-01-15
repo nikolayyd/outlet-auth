@@ -14,17 +14,20 @@ export function renderVerifyPage(success: boolean, message: string) {
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #0b1220;
-      color: #e6edf3;
+      background: #e6e1dc;
+      color: #3b2f2a;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
     .card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
       max-width: 480px;
       width: 100%;
-      background: #111a2e;
+      background: #dad4cd;
       border-radius: 16px;
       padding: 24px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      box-shadow: 0 10px 30px rgba(0,0,0,.15);
       text-align: center;
     }
     h1 {
@@ -40,9 +43,11 @@ export function renderVerifyPage(success: boolean, message: string) {
       padding: 12px 18px;
       border-radius: 10px;
       text-decoration: none;
+      width: fit-content;
       font-weight: 600;
       background: ${success ? '#2ea043' : '#d73a49'};
       color: white;
+      align-self: center;
     }
   </style>
 </head>
