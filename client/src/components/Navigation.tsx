@@ -1,9 +1,30 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import '../styles/Navigation.css';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { userService } from '../services/UserService';
+import { LoadingContext } from '../context/LoadingContext';
 export const Navigation = () => {
   const auth = useContext(AuthContext);
+  const { startLoading, stopLoading } = useContext(LoadingContext)!;
+  const navigate = useNavigate();
+
+  if (auth && auth.loading) {
+    return null;
+  }
+
+  const handleLogout = async () => {
+    startLoading();
+    try {
+      await userService.signOut();
+      auth?.setIsAuth(false);
+      navigate('/');
+    } catch (err) {
+      console.log(err);
+    } finally {
+      stopLoading();
+    }
+  };
 
   return (
     <nav className="container-nav">
@@ -28,17 +49,9 @@ export const Navigation = () => {
             >
               Dashboard
             </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? 'nav-item active' : 'nav-item'
-              }
-              onClick={() => {
-                auth.setIsAuth(false);
-              }}
-              to="/sign-out"
-            >
-              Sign Out
-            </NavLink>
+            <button className="nav-item btn-logout" onClick={handleLogout}>
+              Sign out
+            </button>
           </div>
         ) : (
           <div className="group-nav">
