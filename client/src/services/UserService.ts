@@ -1,9 +1,4 @@
-interface UserData {
-  id: number;
-  email: string;
-  firstName: string;
-  lastName: string;
-}
+import { type UserData } from '../interfaces/userData';
 
 const getError = async (res: Response) => {
   const errorText = await res.text();

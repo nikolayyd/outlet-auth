@@ -9,14 +9,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { userService } from '../services/UserService';
 import { Modal } from './Modal';
 import { LoadingContext } from '../context/LoadingContext';
-import type { ApiError } from '../interfaces/apiError';
 
-export interface FormData {
-  firstName?: string;
-  lastName?: string;
-  email: string;
-  password: string;
-}
+type ApiError = Error & { status: number };
+
+
 
 type FormDataType = z.infer<ReturnType<typeof SignUpSchema>>;
 
@@ -74,7 +70,7 @@ export const Form = ({ signingUp }: FormProps) => {
         return;
       }
 
-      if(signingUp) {
+      if (signingUp) {
         setErrorMessage('An error occurred during sign up. Please try again!');
         return;
       }
@@ -132,7 +128,7 @@ export const Form = ({ signingUp }: FormProps) => {
               {signingUp ? 'Sign Up' : 'Sign In'}
             </button>
 
-            {errorMessage && (<p className="error-message">{errorMessage}</p>)}
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
 
             {!signingUp && (
               <div className="sign-alert">

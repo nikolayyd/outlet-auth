@@ -7,7 +7,12 @@ export interface ModalProps {
   onClose: () => void;
 }
 
-export const Modal: React.FC<ModalProps> = ({ isOpen, title, children, onClose }) => {
+export const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  title,
+  children,
+  onClose,
+}) => {
   if (!isOpen) return null;
 
   return (
@@ -22,4 +27,3 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, title, children, onClose }
     </div>
   );
 };
-
