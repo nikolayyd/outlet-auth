@@ -1,16 +1,3 @@
-/*
---warm-cream: #faf9f6;Background gradient start
---soft-beige: #f5f3f0;Background gradient middle
---gentle-tan: #f0ede8; Background gradient end
---comfort-brown: #8b6655;Primary text and accents
---soft-accent: #f0ceaa;Primary accent color
---warm-accent: #e0be9c;Secondary accent color
---cozy-brown: #c19a82;Link colors
---gentle-error: #d97757; Soft error color
---warm-white: rgba(255,255,255,0.85); Card background
---organic-border: rgba(240,206,170,0.3);Gentle borders
-*/
-
 ::selection {
   background-color: #f0ceaa;
   color: #000;
