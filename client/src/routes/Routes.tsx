@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { Home } from '../pages/Home';
 import { SignIn } from '../pages/SignIn';
 import { SignUp } from '../pages/SignUp';
-import { Dashboard } from '../pages/Dashboard'; // пример
+import { Dashboard } from '../pages/Dashboard'; 
 import { ProtectedRoute } from './ProtectedRoute';
 import { PublicRoute } from './PublicRoute';
 
