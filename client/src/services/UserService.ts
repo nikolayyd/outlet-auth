@@ -7,7 +7,7 @@ const getError = async (res: Response) => {
 
 class UserService {
   async getUser(email: string, password: string): Promise<UserData> {
-    const res = await fetch(`http://localhost:3000/users/get`, {
+    const res = await fetch(`http://localhost:3000/users/sign-in`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -27,7 +27,7 @@ class UserService {
     lastName: string,
     password: string
   ) {
-    const res = await fetch(`http://localhost:3000/users/create`, {
+    const res = await fetch(`http://localhost:3000/users/sign-up`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

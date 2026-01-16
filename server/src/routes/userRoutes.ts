@@ -11,6 +11,6 @@ export const userRoutes = Router();
 
 userRoutes.get('/me', authenticate, me);
 userRoutes.get('/verify-email', verifyEmail);
-userRoutes.post('/get', getUser);
+userRoutes.post('/sign-in', getUser);
 userRoutes.get('/sign-out', signOutUser);
-userRoutes.post('/create', createUser);
+userRoutes.post('/sign-up', createUser);

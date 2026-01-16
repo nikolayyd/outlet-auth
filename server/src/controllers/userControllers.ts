@@ -6,8 +6,12 @@ import { sendMail } from '../utils/nodeMail';
 import { renderVerifyPage } from '../utils/renderVerifyPage';
 type AppError = Error & { status?: number };
 
-const JWT_SECRET = 'supersecret';
-const AGE_OF_TOKEN = 15 * 60 * 1000; // 15 minutes
+if (!process.env.JWT_SECRET) {
+  throw new Error('JWT_SECRET is not defined');
+}
+
+const jwtSecret = process.env.JWT_SECRET;
+const ageOfToken = Number(process.env.AGE_OF_TOKEN) * 60 * 1000; // 1h in milliseconds
 
 export const getUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -23,15 +27,15 @@ export const getUser = async (req: Request, res: Response) => {
 
     const token = jwt.sign(
       { id: user.id, email: user.email, isVerified: user.isVerified },
-      JWT_SECRET,
-      { expiresIn: '15m' }
+      jwtSecret,
+      { expiresIn: '1h' }
     );
 
     res.cookie('token', token, {
       httpOnly: true,
       secure: false,
       sameSite: 'lax',
-      maxAge: AGE_OF_TOKEN,
+      maxAge: ageOfToken,
     });
 
     sendMail(
@@ -66,7 +70,7 @@ export const createUser = async (req: Request, res: Response) => {
 
     const verificationToken = jwt.sign(
       { id: newUser.id, email: newUser.email, type: 'email_verification' },
-      JWT_SECRET,
+      jwtSecret,
       { expiresIn: '24h' }
     );
 
@@ -95,7 +99,7 @@ export const verifyEmail = async (req: Request, res: Response) => {
   if (Array.isArray(token)) token = token[0];
 
   try {
-    const payload = jwt.verify(token as string, JWT_SECRET!) as any;
+    const payload = jwt.verify(token as string, jwtSecret) as any;
 
     if (payload.type !== 'email_verification') {
       return res.status(400).send('Invalid token');
@@ -104,7 +108,11 @@ export const verifyEmail = async (req: Request, res: Response) => {
     // update user in DB
     await userService.verifyUser(payload.id);
 
-    res.status(200).send(renderVerifyPage(true, 'Your email has been verified successfully.'));
+    res
+      .status(200)
+      .send(
+        renderVerifyPage(true, 'Your email has been verified successfully.')
+      );
   } catch (err) {
     res.status(400).send(renderVerifyPage(false, 'Invalid or expired token'));
   }

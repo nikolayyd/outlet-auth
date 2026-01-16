@@ -63,15 +63,9 @@ Client частта е организирана модулно (UI, страни
 Структура:
 
 - server/
-  - src/
-    - controllers/
-    - db/
-    - middleware/
-    - models/
-    - routes/
-    - services/
-    - utils/
-Структура:
+
+  - src/ - controllers/ - db/ - middleware/ - models/ - routes/ - services/ - utils/
+    Структура:
 
 - client/
   - src/
@@ -94,7 +88,6 @@ Client частта е организирана модулно (UI, страни
    - проверява дали email вече съществува
    - хешира паролата с bcrypt и записва потребителя (is_verified = false)
    - генерира verification токен с валидност (TTL)
-   - записва токена и срока му в DB
    - изпраща имейл чрез Nodemailer с линк за потвърждение
 4. При отваряне на линка:
    - backend валидира токена и проверява дали не е изтекъл
@@ -105,43 +98,45 @@ Client частта е организирана модулно (UI, страни
 
 1. Потребителят въвежда email и password
 2. Backend:
-   - ако профилът не е верифициран -> отказ (например 403)
+   - ако профилът не е верифициран -> отказ (грешка 403)
    - сравнява паролата с bcrypt.compare
    - при успех генерира JWT access token с валидност и го връща
-   - записва аналитика (например last_login_at)
+   - записва аналитика (last_login)
 
 ## API (примерни endpoint-и)
 
-- POST /auth/register
-  Регистрация + изпращане на verification email
-- GET /auth/verify?token=...
+- GET /users/me
+  Връща информация за текущо автентикирания потребител
+  (изисква валиден JWT и верифициран имейл)
+- GET /users/verify-email?token=...
   Верификация чрез token
-- POST /auth/login
+- POST /users/sign-up
+  Регистрация + изпращане на verification email
+- POST /users/sign-in
   Вход (само за verified потребители)
-- POST /auth/resend-verification
-  Повторно изпращане на verification email
-- POST /auth/logout
-  Логически logout (клиентът изтрива токена)
-
-## Примерни payload-и
-
-(WIP)
+- POST /users/sign-out
+  Логически sign out (клиентът изтрива токена)
 
 ## Конфигурация (.env)
 
-- Тук се изисква да се създадат променливи за имейла и ключ, чрез които ще се изпращат имейлите.
-- Изисква се адреса на базата данни.
+EMAIL_USER – email адрес за изпращане на системни съобщения
+EMAIL_PASS – app password за email услугата
+DATABASE_URL – адрес на PostgreSQL базата данни
+AGE_OF_TOKEN – време на валидност на JWT токена (в минути)
+JWT_SECRET – таен ключ за подписване на JWT токени
 
 ```env
   EMAIL_USER=example@mail.com
   EMAIL_PASS=exampleauthpass
   DATABASE_URL=postgres://user:pass@localhost:5432/outlet_auth
+  AGE_OF_TOKEN=60
+  JWT_SECRET=supersecret
 ```
 
 ## Инсталация и стартиране
 
 1. Създаване на .env и попълни DB, JWT и SMTP настройките
-2. Инсталиране на зависимостите за backend и client
+2. Инсталиране на зависимостите за server и client
 
 Client(Frontend):
 
